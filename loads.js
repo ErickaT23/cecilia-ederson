@@ -1,5 +1,5 @@
 const guests = [
-    { id: 1, name: "Familia Worford Ramirez", passes: 3 },
+    { id: 1, name: "Familia Wonderland", passes: 3 },
     { id: 2, name: "Rodrigo", passes: 1 },
 ];
 
