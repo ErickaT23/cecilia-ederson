@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cecilia & Ederson</title>
+    <title>Cecilia & Leonardo</title>
     <meta name="description" content="Llego el momento de unir nuestro amor por siempre">
     <meta property="og:url" content="https://honey-invitacion.netlify.app/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Nos Casamos Cecilia & Ederson">
+    <meta property="og:title" content="Nos Casamos Cecilia & Leonardo">
     <meta property="og:image" content="https://honey-invitacion.netlify.app/images/V1.jpeg">
     <link rel="stylesheet" href="/style.css">
     <link rel="preload" href="/images/div.play.png" as="image">    
@@ -24,8 +24,22 @@
     <!-- Pantalla de bienvenida con efecto translúcido -->
 <div id="welcome-section">
     <div class="welcome-card fade-in-element">
+        <lord-icon
+        src="https://cdn.lordicon.com/bencqunn.json" 
+        trigger="loop" 
+        element="2000" 
+        stroke="light" 
+        colors="primary:#F5FFFA,secondary:#FFFAFA" 
+        style="width:100px;height:100px"
+        class="lord-icon-style"
+        ></lord-icon>
+        <div class="welcome-wedding fade-in-element">
+            <h1>Nuestra Boda</h1>
+            <h2>Cecilia Tagre & Leonardo Solis</h2>
+            <p>11 . 10 . 2025</p>
+        </div>
       <p id="guest-name" class="fade-in-element"></p>
-      <p class="fade-in-element">Invitación válida por <span id="passes"></span> <i class="fa-solid fa-ticket"></i></p>
+      <p class="fade-in-element">Hemos reservado <span id="passes"></span> <i class="fa-solid fa-ticket"></i> en su honor.</p>
       <button id="open-envelope-button">Abrir invitación</button>
     </div>
   </div>
@@ -36,7 +50,7 @@
     <div id="envelope">
         <div id="envelope-top"></div>
         <div id="seal" onclick="openEnvelopeAndPlayMusic()">
-            <h2 class="fade-in-element">C | E</h2>
+            <h2 class="fade-in-element">C | L</h2>
         </div>
         <div id="envelope-bottom"></div>
     </div>
@@ -47,16 +61,16 @@
                  <img src="/images/V1.jpeg" alt="Foto de la pareja" class="photo fade-in-element fade-in-element">
              </div>
                 <div class="photo-text fade-in-element fade-in-element">
-                 <h1>Cecilia & Ederson</h1>
-                 <h2 class="fade-in-element">22 . 11 . 2025</h2>
+                 <h1>Cecilia & Leonardo</h1>
+                 <h2 class="fade-in-element">11 . 10 . 2025</h2>
                </div>
           </div> 
         <div class="contenedor-play">
-            <h2 class="texto-play fade-in-element fade-in-element">L'hymne á l'amour</h2>
+            <h2 class="texto-play fade-in-element fade-in-element">Hasta mi final - Il Divo</h2>
             <div id="playPauseButton" class="icono-contenedor fade-in-element fade-in-element">
                 <i id="iconoPlayPause" class="fas fa-play" aria-hidden="true"></i>
             </div>
-            <audio id="audioPlayer" src="/music/videoplayback (7).mp4"></audio>
+            <audio id="audioPlayer" src="/music/Hasta mi final - Il Divo (cover violín) Julio Cante - julio cante violinista.mp3"></audio>
             <div class="progress-container">
                 <input id="progress-bar" type="range" value="0" min="0" max="100" step="1">
                 <div class="time-display">
@@ -93,6 +107,28 @@
                       </div>
                  </div>
             </div>
+             <!-- Sección de bendición y padres -->
+           <div class="blessing-section fade-in-element fade-in-element">
+            <lord-icon 
+            src="https://cdn.lordicon.com/lmcbtkfm.json" 
+            trigger="loop" 
+            stroke="light"  
+            colors="primary:#556B2F,secondary:#808000" 
+            class="lord-icon-style"
+            ></lord-icon>
+             <p class="blessing-title">Con la bendición de Dios y de nuestros queridos padres</p>
+                <div class="parents-block">
+                   <h2>Padres de la Novia</h2>
+                   <p>Vender Gregorio Tagre Marroquín y</p>
+                   <p>Olga Elizabeth Ordóñez Avendaño</p>
+                </div>
+                <div class="parents-block">
+                  <h2>Padres del Novio</h2>
+                  <p>Julio Rodolfo Solis Gaitán y</p>
+                  <p>Nidia Magaly Tunchez de Solís.</p>
+                </div>
+            </div>
+
             <div class="itinerary-section fade-in-element fade-in-element">
                 <div class="itinerary-item">
                     <lord-icon 
@@ -103,36 +139,36 @@
                      colors="primary:#556B2F,secondary:#808000" 
                      class="lord-icon-style"
                      ></lord-icon>
-                    <h2>Ceremonia</h2>
-                    <p>Rectoría Beatas de Belén</p>
+                    <h2>Ceremonia Religiosa</h2>
+                    <p>Parroquia El Señor de Esquipulas</p>
                     <div class="itinerary-details">
                         <div class="time-location">
-                            <span class="date">23 Abril</span>
+                            <span class="date">11 Octubre</span>
                             <span class="separator">|</span>
-                            <span class="time">16:00 hrs</span>
+                            <span class="time">15:00 hrs</span>
                         </div>
-                        <p class="location">14 Calle 9-30, Cdad. de Guatemala</p>
-                        <button type="button"  class="directions-button" onclick="location.href='https://maps.app.goo.gl/dd3DC3b8pCmZ2p366'">CÓMO LLEGAR</button>
+                        <p class="location">El Cerinal, Barberena, Santa Rosa </p>
+                        <button type="button"  class="directions-button" onclick="location.href='https://waze.com/ul/h9fx9wben7'">CÓMO LLEGAR</button>
                     </div>
                 </div>
                 <div class="itinerary-item">
                     <lord-icon 
-                     src="https://cdn.lordicon.com/czmrowis.json" 
+                     src="https://cdn.lordicon.com/jjqwsavk.json" 
                      trigger="loop" 
                      stroke="light" 
                      colors="primary:#556B2F,secondary:#808000" 
                      class="lord-icon-style"
                      ></lord-icon>
-                    <h2>Boda Civil</h2>
-                    <p>Club Guatemala</p>
+                    <h2>Recepción</h2>
+                    <p>Turicentro Urabá</p>
                     <div class="itinerary-details">
                         <div class="time-location">
-                            <span class="date">23 Abril</span>
+                            <span class="date">11 Octubre</span>
                             <span class="separator">|</span>
-                            <span class="time">19:00 hrs</span>
+                            <span class="time">16:30 hrs</span>
                         </div>
-                        <p class="location">7a Avenida 12-75 zona 1, Cdad. de Guatemala</p>
-                        <button class="directions-button" onclick="location.href='https://maps.app.goo.gl/QRSd1unF2KzfypVv9'">CÓMO LLEGAR</button>
+                        <p class="location">Barberena, Santa Rosa</p>
+                        <button class="directions-button" onclick="location.href='https://waze.com/ul/h9fx9rsecr'">CÓMO LLEGAR</button>
                     </div>
                 </div>
             </div>
@@ -145,7 +181,7 @@
                  colors="primary:#556B2F,secondary:#808000" 
                  class="lord-icon-style"
                  ></lord-icon>
-                <p>Su presencia es nuestro mayor regalo. Pero si desean acompañarnos también con un detalle, durante la felicitación podrán entregarnos su presente en un sobre con todo el amor que recibimos ese día.</p>
+                <p>"El mejor regalo es su compañía, sin embargo, si desean contribuir a nuestra nueva vida juntos, cualquier obsequio será muy apreciado". </p>
                 <p>¡Gracias por ser parte de este capítulo tan especial!</p>
             </div>
             <div class="dresscode-section fade-in-element fade-in-element">
@@ -153,7 +189,7 @@
                 <div class="icons">
                     <img src="/images/ICONOS.png" alt="icon-dresscode">
                 </div>
-                <p>Traje formal y elegante, el color reservado es el blanco.</p>
+                <p>Nos encantaría que nos acompañaras con atuendo formal/elegante para hacer que la ocasión sea aún más especial.</p>
             </div>   
             <div class="gallery-section fade-in-element fade-in-element">
                 <h2>Galería de fotos</h2>
@@ -193,26 +229,21 @@
                     </label>
                 </div>
             </div>
-            <div class="wishes-section fade-in-element fade-in-element">
-                <h2>Buenos deseos</h2>
-                <button  type="button" onclick="toggleWishes()">VER BUENOS DESEOS</button>
-                <div id="wishes" class="hidden">
-                    <!-- Aquí se mostrarán los buenos deseos -->
-                </div>
-                <button type="button" onclick="toggleWishForm()">ENVIAR BUENOS DESEOS</button>
-                <div id="wish-form" class="hidden">
-                    <h3>Enviar Buenos Deseos</h3>
-                    <label for="wish-name">Nombre:</label>
-                    <input type="text" id="wish-name">
-                    <label for="wish-message">Mensaje de buenos deseos:</label>
-                    <textarea id="wish-message"></textarea>
-                    <button type="submit" onclick="submitWish()">ENVIAR</button>
-                </div>
-            </div>
+            <div class="adults-only-section fade-in-element fade-in-element">
+                <lord-icon 
+                src="https://cdn.lordicon.com/yvgmrqny.json" 
+                trigger="loop" 
+                stroke="light"  
+                colors="primary:#556B2F,secondary:#808000" 
+                class="lord-icon-style"
+                ></lord-icon>
+                <h2>Solo adultos</h2>
+                <p>Queremos que disfruten de una noche especial, por lo que este evento será exclusivamente para adultos. Agradecemos su comprensión y cariño.</p>
+            </div>            
             <div class="rsvp-section fade-in-element fade-in-element">
                 <h2>Confirmación</h2>
                 <lord-icon 
-                 src="https://cdn.lordicon.com/wzwygmng.json" 
+                 src="https://cdn.lordicon.com/unkasvor.json" 
                  trigger="loop" 
                  stroke="light"  
                  colors="primary:#556B2F,secondary:#808000" 
@@ -225,7 +256,8 @@
                 <img src="/images/V2.jpeg" alt="Foto de la pareja">
             </div>
             <div class="banner-section fade-in-element fade-in-element1">
-                <p>"La felicidad comienza aquí, en nuestra boda".</p>
+                <p>"¡Advertencia! Nuestra boda puede contener excesivas cantidades de amor, risas y baile. Les rogamos asistir bajo su propio riesgo y diversión garantizada"
+                    ¡Te esperamos!</p>
             </div>
             <footer class="fade-in-element fade-in-element">
                 <div class="social-icons">

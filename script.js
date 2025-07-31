@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Inicializar el contador
-    const targetDate = new Date('2025-11-22T00:00:00').getTime();
+    const targetDate = new Date('2025-10-11T00:00:00').getTime();
     const countdown = setInterval(() => {
         const now = new Date().getTime();
         const distance = targetDate - now;
