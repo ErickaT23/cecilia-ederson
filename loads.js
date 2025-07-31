@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Mostrar la cantidad de pases con "pase" o "pases" dependiendo de la cantidad
     if (passes > 0) {
-        document.getElementById('passes').textContent = `${passes} ${passes === 1 ? 'pase' : 'pases'}`;
+        document.getElementById('passes').textContent = `${passes} ${passes === 1 ? 'lugar' : 'lugares'}`;
     } else {
         document.querySelector('.invitation-info-section').style.display = 'none';
     }
