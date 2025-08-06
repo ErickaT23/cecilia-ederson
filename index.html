@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cecilia & Leonardo</title>
     <meta name="description" content="Llego el momento de unir nuestro amor por siempre">
-    <meta property="og:url" content="https://honey-invitacion.netlify.app/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Nos Casamos Cecilia & Leonardo">
-    <meta property="og:image" content="https://honey-invitacion.netlify.app/images/V1.jpeg">
     <link rel="stylesheet" href="/style.css">
     <link rel="preload" href="/images/div.play.png" as="image">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,23 +32,22 @@
         class="lord-icon-style"
         ></lord-icon>
         <div class="welcome-wedding fade-in-element">
-            <h1>Nuestra Boda</h1>
-            <h2>Cecilia Tagre & Leonardo Solis</h2>
-            <p>11 . 10 . 2025</p>
+            <h1 class="titulo-boda">Nuestra Boda</h1>
+            <h2 class="nombres-boda">Leonardo Solís y Cecilia Tagre</h2>
+            <p class="fecha-boda">11 . 10 . 2025</p>
         </div>
-      <p id="guest-name" class="fade-in-element"></p>
-      <p class="fade-in-element">Hemos reservado <span id="passes"></span> en su honor.</p>
-      <button id="open-envelope-button">Abrir invitación</button>
+        <p id="guest-name" class="guest-name-text fade-in-element"></p>
+        <p class="passes-text fade-in-element">
+            Hemos reservado <span id="passes"></span> en su honor.
+        </p>
+      <button id="open-envelope-button">Ver invitación</button>
     </div>
   </div>
-  
-
-  
     <!-- Sección de sobre -->
     <div id="envelope">
         <div id="envelope-top"></div>
         <div id="seal" onclick="openEnvelopeAndPlayMusic()">
-            <h2 class="fade-in-element">C | L</h2>
+            <h2 class="fade-in-element">L | C</h2>
         </div>
         <div id="envelope-bottom"></div>
     </div>
@@ -58,10 +55,10 @@
     <div id="invitation" class="hidden">
           <div class="photo-section fade-in-element">
              <div class="photo-container">
-                 <img src="/images/V1.jpeg" alt="Foto de la pareja" class="photo fade-in-element fade-in-element">
+                 <img src="/images/foto-inicial.jpg" alt="Foto de la pareja" class="photo fade-in-element fade-in-element">
              </div>
                 <div class="photo-text fade-in-element fade-in-element">
-                 <h1>Cecilia Tagre & Leonardo Solis</h1>
+                 <h1>Leonardo Solís y Cecilia Tagre</h1>
                  <h2 class="fade-in-element">11 . 10 . 2025</h2>
                </div>
           </div> 
@@ -81,9 +78,9 @@
          <div class="content">
             <div class="photo-section fade-in-element fade-in-element">
                 <div class="photo-container">
-                    <img src="/images/V4.jpeg" alt="Foto de la pareja" class="photo fade-in-element fade-in-element">
+                    <img src="/images/foto-calendario.jpg" alt="Foto de la pareja" class="photo fade-in-element fade-in-element">
                 </div>
-                      <div class="photo-text fade-in-element fade-in-element">
+                      <div class="photo-text-c fade-in-element fade-in-element">
                           <h1>¡Nos casamos!</h1>
                           <p>El día en que nuestros corazones se unen para siempre ha llegado. Compartan nuestra alegría en nuestra boda.</p>
                           <div class="countdown fade-in-element fade-in-element">
@@ -128,7 +125,11 @@
                   <p>Nidia Magaly Tunchez de Solís.</p>
                 </div>
             </div>
-
+            <!--Foto de separacion-->
+            <div class="photo-separation fade-in-element fade-in-element">
+                <img src="/images/foto-vertical-1.jpg" alt="Foto de la pareja" loading="lazy">
+            </div>
+            <!-- Sección de itinerario -->
             <div class="itinerary-section fade-in-element fade-in-element">
                 <div class="itinerary-item">
                     <lord-icon 
@@ -145,7 +146,7 @@
                         <div class="time-location">
                             <span class="date">11 Octubre</span>
                             <span class="separator">|</span>
-                            <span class="time">15:00 hrs</span>
+                            <span class="time">14:30 hrs</span>
                         </div>
                         <p class="location">El Cerinal, Barberena, Santa Rosa </p>
                         <button type="button"  class="directions-button" onclick="location.href='https://waze.com/ul/h9fx9wben7'">CÓMO LLEGAR</button>
@@ -173,7 +174,7 @@
                 </div>
             </div>
             <div class="gifts-section fade-in-element fade-in-element">
-                <h2>Regalo</h2>
+                <h2>Regalos</h2>
                 <lord-icon 
                  src="https://cdn.lordicon.com/ibydboev.json" 
                  trigger="loop" 
@@ -183,6 +184,10 @@
                  ></lord-icon>
                 <p>"El mejor regalo es su compañía, sin embargo, si desean contribuir a nuestra nueva vida juntos, cualquier obsequio será muy apreciado". </p>
                 <p>¡Gracias por ser parte de este capítulo tan especial!</p>
+            </div>
+            <!--Foto de separacion-->
+            <div class="photo-separation fade-in-element fade-in-element">
+                <img src="/images/foto-vertical-2.jpg" alt="Foto de la pareja" loading="lazy">
             </div>
             <div class="dresscode-section fade-in-element fade-in-element">
                 <h2>Código de Vestimenta</h2>
@@ -208,7 +213,7 @@
                 <div class="gallery-main fade-in-element">
                     <!-- Al hacer clic en la imagen principal, se abre el modal -->
                     <label for="toggle-modal">
-                        <img id="main-photo" src="/images/H10.jpeg" alt="Foto principal" onclick="changePhoto(this)">
+                        <img id="main-photo" src="/images/foto-horizontal-1.jpg" alt="Foto principal" onclick="changePhoto(this)">
                     </label>
                 </div>
             
@@ -216,16 +221,58 @@
                 <div class="gallery-thumbs fade-in-element">
                     <!-- Cada miniatura también actúa como disparador del modal -->
                     <label for="toggle-modal">
-                        <img src="/images/H10.jpeg" alt="Foto 1" onclick="changePhoto(this)">
+                        <img src="/images/foto-horizontal-1.jpg" alt="Foto 1" onclick="changePhoto(this)">
                     </label>
                     <label for="toggle-modal">
-                        <img src="/images/H2.jpeg" alt="Foto 2" onclick="changePhoto(this)">
+                        <img src="/images/foto-horizontal-2.jpg" alt="Foto 2" onclick="changePhoto(this)">
                     </label>
                     <label for="toggle-modal">
-                        <img src="/images/H6.jpeg" alt="Foto 3" onclick="changePhoto(this)">
+                        <img src="/images/foto-horizontal-3.jpg" alt="Foto 3" onclick="changePhoto(this)">
                     </label>
                     <label for="toggle-modal">
-                        <img src="/images/H4.jpeg" alt="Foto 4" onclick="changePhoto(this)">
+                        <img src="/images/foto-h4.jpg" alt="Foto 4" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h5.jpg" alt="Foto 5" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h6.jpg" alt="Foto 6" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h7.jpg" alt="Foto 7" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h8.jpg" alt="Foto 8" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h10.jpg" alt="Foto 9" onclick="changePhoto(this)">    
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h11.jpg" alt="Foto 10" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h12.jpg" alt="Foto 11" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h14.jpg" alt="Foto 12" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h15.jpg" alt="Foto 13" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h16.jpg" alt="Foto 14" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-h17.jpg" alt="Foto 15" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-18.jpg" alt="Foto 16" onclick="changePhoto(this)"> 
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-anillo.jpg" alt="Foto 17" onclick="changePhoto(this)">
+                    </label>
+                    <label for="toggle-modal">
+                        <img src="/images/foto-compromiso.jpg" alt="Foto 18" onclick="changePhoto(this)">
                     </label>
                 </div>
             </div>
@@ -237,8 +284,8 @@
                 colors="primary:#556B2F,secondary:#808000" 
                 class="lord-icon-style"
                 ></lord-icon>
-                <h2>Solo adultos</h2>
-                <p>Queremos que disfruten de una noche especial, por lo que este evento será exclusivamente para adultos. Agradecemos su comprensión y cariño.</p>
+                <h2>Un momento intimo</h2>
+                <p>Como toda gran historia cada personaje tiene su lugar especial, te pedimos respetar el número de lugares asignados.</p>
             </div>            
             <div class="rsvp-section fade-in-element fade-in-element">
                 <h2>Confirmación</h2>
@@ -249,11 +296,16 @@
                  colors="primary:#556B2F,secondary:#808000" 
                  class="lord-icon-style"
                  ></lord-icon>
-                <p>Para nosotros es muy importante que confirmes tu asistencia antes del 31 de Marzo, o bien indicarnos si no podrás acompañarnos.</p>
-                <button type="button"  onclick="location.href='https://wa.me/50236011737?text='">CONFIRMA TU ASISTENCIA</button>
+                <p>Para nosotros es muy importante que confirmes tu asistencia antes del 31 de Agosto, o bien indicarnos si no podrás acompañarnos.</p>
+                <button type="button" onclick="location.href='https://wa.me/50236011737?text=Hola Leonardo, confirmo mi asistencia a su boda'">
+                    Confirmar con el Novio
+                </button>
+                <button type="button" onclick="location.href='https://wa.me/50248888240?text=Hola Cecilia, confirmo mi asistencia a su boda'">
+                    Confirmar con la Novia
+                </button>                
             </div>
             <div class="photo-full fade-in-element fade-in-element">
-                <img src="/images/V2.jpeg" alt="Foto de la pareja">
+                <img src="/images/foto-vertical-3.jpg" alt="Foto de la pareja">
             </div>
             <div class="banner-section fade-in-element fade-in-element1">
                 <p>"¡Advertencia! Nuestra boda puede contener excesivas cantidades de amor, risas y baile. Les rogamos asistir bajo su propio riesgo y diversión garantizada"
