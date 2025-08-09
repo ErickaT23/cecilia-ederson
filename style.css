@@ -963,3 +963,115 @@ footer .logo img {
     height: 100%;
     object-fit: cover;
 }
+/* Slider */
+.slider {
+    position: relative;
+    max-width: 1000px;
+    width: 92%;
+    margin: 0 auto 20px;
+    text-align: center;
+  }
+  
+  .slider img#slider-image {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  
+  /* Flechas */
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 38px;
+    line-height: 1;
+    color: #fff;
+    background: rgba(0,0,0,0.35);
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .arrow.left { left: 12px; }
+  .arrow.right { right: 12px; }
+  .arrow:hover { background: rgba(0,0,0,0.55); }
+  
+  /* Reusa tu .modal, .modal-content y .close existentes */
+/* Slider sin miniaturas */
+.slider {
+    position: relative;
+    max-width: 1000px;
+    width: 92%;
+    margin: 0 auto 20px;
+    text-align: center;
+  }
+  
+  .slider img#slider-image {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+  
+  /* Flechas */
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 38px;
+    line-height: 1;
+    color: #fff;
+    background: rgba(0,0,0,0.35);
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .arrow.left { left: 12px; }
+  .arrow.right { right: 12px; }
+  .arrow:hover { background: rgba(0,0,0,0.55); }
+  
+  /* (Opcional) transición suave entre imágenes */
+  .slider img#slider-image {
+    transition: opacity .4s ease;
+  }
+/* Imagen expandida a pantalla completa */
+.slider img.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    max-width: 95vw;
+    max-height: 95vh;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    z-index: 9999;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    background: #000;
+    cursor: zoom-out;
+    animation: fadeInZoom 0.3s ease;
+  }
+  
+  /* Fondo oscuro al expandir */
+  .slider.expanded-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9998;
+  }
+  
+  /* Animación */
+  @keyframes fadeInZoom {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    to   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  }
+
+  

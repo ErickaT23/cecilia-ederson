@@ -268,3 +268,160 @@ document.getElementById('open-envelope-button').addEventListener('click', functi
     document.getElementById('welcome-section').style.display = 'none';
     document.getElementById('envelope').classList.remove('hidden');
 });
+// ==============================
+// GALERÍA: autoplay + flechas + modal (aislada)
+// ==============================
+(function initGallerySlider() {
+    const photos = [
+      "/images/foto-horizontal-1.jpg",
+      "/images/foto-horizontal-2.jpg",
+      "/images/foto-horizontal-3.jpg",
+      "/images/foto-h4.jpg",
+      "/images/foto-h5.jpg",
+      "/images/foto-h6.jpg",
+      "/images/foto-h7.jpg",
+      "/images/foto-h8.jpg",
+      "/images/foto-h10.jpg",
+      "/images/foto-h11.jpg",
+      "/images/foto-h12.jpg",
+      "/images/foto-h14.jpg",
+      "/images/foto-h15.jpg",
+      "/images/foto-h16.jpg",
+      "/images/foto-h17.jpg",
+      "/images/foto-18.jpg",
+      "/images/foto-anillo.jpg",
+      "/images/foto-compromiso.jpg"
+    ];
+  
+    const img    = document.getElementById("slider-image");
+    const prev   = document.getElementById("prev");
+    const next   = document.getElementById("next");
+    const modal  = document.getElementById("photo-modal");
+    const mImg   = document.getElementById("modal-image");
+    const mClose = document.getElementById("close-modal");
+  
+    // Si la nueva galería no está en el DOM, no hacemos nada
+    if (!img || !prev || !next || !modal || !mImg || !mClose) {
+      console.warn("[Galería] Elementos no encontrados. Revisa IDs: slider-image, prev, next, photo-modal, modal-image, close-modal.");
+      return;
+    }
+  
+    let index = 0;
+  
+    function show(i) {
+      index = (i + photos.length) % photos.length;
+      img.src = photos[index];
+    }
+  
+    function change(delta) { show(index + delta); }
+  
+    // Autoplay (cada 4s)
+    let timer = setInterval(() => change(1), 4000);
+    const pause = () => { clearInterval(timer); timer = null; };
+    const resume = () => { if (!timer) timer = setInterval(() => change(1), 4000); };
+  
+    // Flechas
+    prev.addEventListener("click", () => { pause(); change(-1); resume(); });
+    next.addEventListener("click", () => { pause(); change(1);  resume(); });
+  
+    // Abrir modal al click en la imagen
+    // Click para zoom dentro de la sección (overlay solo en galería)
+img.addEventListener("click", () => {
+    const section = img.closest(".gallery-section");
+    if (!section) return;
+  
+    if (section.classList.contains("zoom")) {
+      section.classList.remove("zoom");
+      resume(); // vuelve el autoplay
+    } else {
+      section.classList.add("zoom");
+      pause(); // pausa el autoplay mientras está en zoom
+    }
+  });  
+  
+    // Cerrar modal (X)
+    mClose.addEventListener("click", () => { modal.style.display = "none"; resume(); });
+  
+    // Si tu .modal cubre toda la pantalla, esto cierra al click fuera de la imagen
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) { modal.style.display = "none"; resume(); }
+    });
+  
+    // Pausar autoplay al pasar el mouse
+    img.addEventListener("mouseenter", pause);
+    img.addEventListener("mouseleave", resume);
+  })();
+// ==============================
+// GALERÍA: autoplay + flechas + modal (sin miniaturas)
+// ==============================
+(function initGallerySlider() {
+    const photos = [
+      "/images/foto-horizontal-1.jpg",
+      "/images/foto-horizontal-2.jpg",
+      "/images/foto-horizontal-3.jpg",
+      "/images/foto-h4.jpg",
+      "/images/foto-h5.jpg",
+      "/images/foto-h6.jpg",
+      "/images/foto-h7.jpg",
+      "/images/foto-h8.jpg",
+      "/images/foto-h10.jpg",
+      "/images/foto-h11.jpg",
+      "/images/foto-h12.jpg",
+      "/images/foto-h14.jpg",
+      "/images/foto-h15.jpg",
+      "/images/foto-h16.jpg",
+      "/images/foto-h17.jpg",
+      "/images/foto-18.jpg",
+      "/images/foto-anillo.jpg",
+      "/images/foto-compromiso.jpg"
+    ];
+  
+    const img    = document.getElementById("slider-image");
+    const prev   = document.getElementById("prev");
+    const next   = document.getElementById("next");
+    const modal  = document.getElementById("photo-modal");
+    const mImg   = document.getElementById("modal-image");
+    const mClose = document.getElementById("close-modal");
+  
+    if (!img || !prev || !next || !modal || !mImg || !mClose) {
+      console.warn("[Galería] Faltan elementos. Revisa IDs: slider-image, prev, next, photo-modal, modal-image, close-modal.");
+      return;
+    }
+  
+    let index = 0;
+  
+    function show(i) {
+      index = (i + photos.length) % photos.length;
+      // efecto de fade opcional
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = photos[index];
+        img.onload = () => { img.style.opacity = 1; };
+      }, 150);
+    }
+  
+    function change(delta) { show(index + delta); }
+  
+    // Autoplay (cada 4s)
+    let timer = setInterval(() => change(1), 4000);
+    const pause = () => { clearInterval(timer); timer = null; };
+    const resume = () => { if (!timer) timer = setInterval(() => change(1), 4000); };
+  
+    // Flechas
+    prev.addEventListener("click", () => { pause(); change(-1); resume(); });
+    next.addEventListener("click", () => { pause(); change(1);  resume(); });
+  
+    // Abrir modal al click en la imagen
+    img.addEventListener("click", () => {
+      modal.style.display = "block";
+      mImg.src = photos[index];
+      pause();
+    });
+  
+    // Cerrar modal (X o clic fuera)
+    mClose.addEventListener("click", () => { modal.style.display = "none"; resume(); });
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) { modal.style.display = "none"; resume(); }
+    });
+  })();
+    
