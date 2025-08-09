@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Todo el código relacionado con la inicialización
+    // ===== Referencias base =====
     var audio = document.getElementById("audioPlayer");
     var playPauseButton = document.getElementById("playPauseButton");
     var iconoPlayPause = document.getElementById("iconoPlayPause");
@@ -7,93 +7,103 @@ document.addEventListener("DOMContentLoaded", function() {
     var currentTimeDisplay = document.getElementById("current-time");
     var durationTimeDisplay = document.getElementById("duration-time");
     
-    var modal = document.getElementById('photo-modal');
     var seal = document.getElementById("seal");
-
-    let currentSlide = 0;   
     const wishes = [];
 
-    // Función para abrir el sobre y reproducir la música
+    // ===== Sobre + música =====
     function openEnvelopeAndPlayMusic() {
         var envelopeTop = document.getElementById("envelope-top");
         var envelopeBottom = document.getElementById("envelope-bottom");
         var envelope = document.getElementById("envelope");
         var invitation = document.getElementById("invitation");
 
-        envelopeTop.style.transform = 'translateY(-100vh)';
-        envelopeBottom.style.transform = 'translateY(100vh)';
+        if (envelopeTop) envelopeTop.style.transform = 'translateY(-100vh)';
+        if (envelopeBottom) envelopeBottom.style.transform = 'translateY(100vh)';
 
         setTimeout(function() {
-            envelope.classList.add('hidden');
-            invitation.classList.remove('hidden');
-        }, 1000); // Ajusta el tiempo según tu animación
+            if (envelope) envelope.classList.add('hidden');
+            if (invitation) invitation.classList.remove('hidden');
+        }, 1000);
 
-        // Reproducir música
-        audio.play().then(function() {
-            iconoPlayPause.classList.remove("fa-play");
-            iconoPlayPause.classList.add("fa-pause");
-            updateProgress(); // Iniciar la actualización del progreso
-        }).catch(function(error) {
-            console.log('Playback failed: ', error);
-            iconoPlayPause.classList.add("fa-play");
-            iconoPlayPause.classList.remove("fa-pause");
+        if (audio) {
+            audio.play().then(function() {
+                if (iconoPlayPause) {
+                    iconoPlayPause.classList.remove("fa-play");
+                    iconoPlayPause.classList.add("fa-pause");
+                }
+                updateProgress();
+            }).catch(function(error) {
+                console.log('Playback failed: ', error);
+                if (iconoPlayPause) {
+                    iconoPlayPause.classList.add("fa-play");
+                    iconoPlayPause.classList.remove("fa-pause");
+                }
+            });
+        }
+    }
+
+    if (seal) {
+        seal.addEventListener("click", function() {
+            openEnvelopeAndPlayMusic();
         });
     }
 
-    // Agregar event listener para el sello
-    seal.addEventListener("click", function() {
-        openEnvelopeAndPlayMusic();
-    });
-
-    // Función para reproducir/pausar la música y cambiar el icono
+    // ===== Play / Pause =====
     function togglePlayPause() {
+        if (!audio) return;
         if (audio.paused) {
             audio.play().then(function() {
-                iconoPlayPause.classList.remove("fa-play");
-                iconoPlayPause.classList.add("fa-pause");
-                updateProgress(); // Iniciar la actualización del progreso
+                if (iconoPlayPause) {
+                    iconoPlayPause.classList.remove("fa-play");
+                    iconoPlayPause.classList.add("fa-pause");
+                }
+                updateProgress();
             }).catch(function(error) {
                 console.log('Playback failed: ', error);
             });
         } else {
             audio.pause();
-            iconoPlayPause.classList.add("fa-play");
-            iconoPlayPause.classList.remove("fa-pause");
+            if (iconoPlayPause) {
+                iconoPlayPause.classList.add("fa-play");
+                iconoPlayPause.classList.remove("fa-pause");
+            }
         }
     }
 
-    // Actualizar el progreso de la barra y el tiempo
+    // ===== Progreso del audio =====
     function updateProgress() {
+        if (!audio || !progressBar || !currentTimeDisplay || !durationTimeDisplay) return;
+
         audio.addEventListener("timeupdate", function() {
             var progress = (audio.currentTime / audio.duration) * 100;
-            progressBar.value = progress;
+            if (!isNaN(progress)) progressBar.value = progress;
 
-            // Actualizar el tiempo transcurrido
-            var currentMinutes = Math.floor(audio.currentTime / 60);
-            var currentSeconds = Math.floor(audio.currentTime % 60);
+            var currentMinutes = Math.floor(audio.currentTime / 60) || 0;
+            var currentSeconds = Math.floor(audio.currentTime % 60) || 0;
             currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' + currentSeconds : currentSeconds}`;
 
-            // Actualizar el tiempo total (duración de la canción)
             if (!isNaN(audio.duration)) {
-                var durationMinutes = Math.floor(audio.duration / 60);
-                var durationSeconds = Math.floor(audio.duration % 60);
+                var durationMinutes = Math.floor(audio.duration / 60) || 0;
+                var durationSeconds = Math.floor(audio.duration % 60) || 0;
                 durationTimeDisplay.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' + durationSeconds : durationSeconds}`;
             }
         });
     }
 
-    // Saltar a una parte de la canción cuando se hace clic en la barra de progreso
-    progressBar.addEventListener("input", function() {
-        var newTime = (progressBar.value / 100) * audio.duration;
-        audio.currentTime = newTime;
-    });
+    if (progressBar && audio) {
+        progressBar.addEventListener("input", function() {
+            var newTime = (progressBar.value / 100) * audio.duration;
+            if (!isNaN(newTime)) audio.currentTime = newTime;
+        });
+    }
 
-    // Escuchar el clic del botón de play/pause
-    playPauseButton.addEventListener("click", function() {
-        togglePlayPause();
-    });
+    if (playPauseButton) {
+        playPauseButton.addEventListener("click", function() {
+            togglePlayPause();
+        });
+    }
 
-    // Inicializar el contador
+    // ===== Countdown =====
     const targetDate = new Date('2025-10-11T00:00:00').getTime();
     const countdown = setInterval(() => {
         const now = new Date().getTime();
@@ -104,174 +114,96 @@ document.addEventListener("DOMContentLoaded", function() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById('days').textContent = days < 10 ? '0' + days : days;
-        document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-        document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        if (daysEl)    daysEl.textContent    = days    < 10 ? '0' + days    : days;
+        if (hoursEl)   hoursEl.textContent   = hours   < 10 ? '0' + hours   : hours;
+        if (minutesEl) minutesEl.textContent = minutes < 10 ? '0' + minutes : minutes;
+        if (secondsEl) secondsEl.textContent = seconds < 10 ? '0' + seconds : seconds;
 
         if (distance < 0) {
             clearInterval(countdown);
-            document.querySelector('.countdown').textContent = "Gracias por habernos acompañado en este día tan especial.";
+            const cd = document.querySelector('.countdown');
+            if (cd) cd.textContent = "Gracias por habernos acompañado en este día tan especial.";
         }
     }, 1000);
 
-    // Funciones para los buenos deseos
+    // ===== Fade-in al hacer scroll (una sola vez) =====
+    try {
+        const elementsToFade = document.querySelectorAll('.fade-in-element');
+
+        // Delay escalonado sutil
+        elementsToFade.forEach((element, index) => {
+            const delay = index * 0.05;
+            element.style.transitionDelay = `${delay}s`;
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        elementsToFade.forEach(element => observer.observe(element));
+    } catch (e) {
+        // Fallback: muestra todo si el observer falla
+        document.querySelectorAll('.fade-in-element').forEach(el => el.classList.add('visible'));
+        console.error('Fallback fade-in:', e);
+    }
+
+    // ===== Mostrar invitación (ocultar welcome) =====
+    const openBtn = document.getElementById('open-envelope-button');
+    if (openBtn) {
+        openBtn.addEventListener('click', function () {
+            const welcome = document.getElementById('welcome-section');
+            const envelope = document.getElementById('envelope');
+            if (welcome) welcome.style.display = 'none';
+            if (envelope) envelope.classList.remove('hidden');
+        });
+    }
+
+    // ===== (Opcional) Buenos deseos: helpers básicos =====
     function toggleWishes() {
         const wishesDiv = document.getElementById('wishes');
+        if (!wishesDiv) return;
         wishesDiv.classList.toggle('hidden');
         wishesDiv.innerHTML = wishes.map(wish => `<p><strong>${wish.name}:</strong> ${wish.message}</p>`).join('');
     }
 
     function toggleWishForm() {
-        document.getElementById('wish-form').classList.toggle('hidden');
+        const form = document.getElementById('wish-form');
+        if (form) form.classList.toggle('hidden');
     }
 
     function submitWish() {
-        const name = document.getElementById('wish-name').value;
-        const message = document.getElementById('wish-message').value;
-        wishes.push({ name, message });
-        document.getElementById('wish-name').value = '';
-        document.getElementById('wish-message').value = '';
-        toggleWishForm();
-        toggleWishes();
+        const nameEl = document.getElementById('wish-name');
+        const msgEl  = document.getElementById('wish-message');
+        if (!nameEl || !msgEl) return;
+
+        const name = nameEl.value;
+        const message = msgEl.value;
+
+        if (name && message) {
+            wishes.push({ name, message });
+            nameEl.value = '';
+            msgEl.value = '';
+            toggleWishForm();
+            toggleWishes();
+        }
     }
 
-//aparicion de textos con scroll
-document.addEventListener("DOMContentLoaded", function() {
-    const elementsToFade = document.querySelectorAll('.fade-in-element');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    elementsToFade.forEach(element => {
-        observer.observe(element);
-    });
-});
-//fin de la funcion de scroll
-
-//Inicio de funcion de la galeria
-// Función para cambiar la foto principal en la galería
-function changePhoto(element) {
-    const mainPhoto = document.getElementById('main-photo-modal');
-    mainPhoto.src = element.src;
-}
+    // Si necesitas estos en global (por onclick en HTML), descomenta:
+    // window.toggleWishes = toggleWishes;
+    // window.toggleWishForm = toggleWishForm;
+    // window.submitWish = submitWish;
 });
 
-//galeria
-function changePhoto(element) {
-    const mainPhotoModal = document.getElementById('main-photo');
-    const mainPhoto = document.getElementById('main-photo-modal');
-
-    // Actualizar la imagen del modal y la imagen principal
-    mainPhoto.src = element.src; // Imagen del modal
-    mainPhotoModal.src = element.src; // Actualizar la imagen principal
-
-     // Si la imagen seleccionada NO es la imagen principal (miniaturas), abrir el modal
-     if (element !== mainPhoto) {
-        openModal();
-    }
-}
-
-function openModal() {
-    const modal = document.getElementById('photo-modal');
-    modal.style.display = 'block';
-}
-
-function closeModal() {
-    const modal = document.getElementById('photo-modal');
-    modal.style.display = 'none';
-}
-
-// Añadir el evento de cierre al botón de cerrar (la 'X')
-document.querySelector('.close').addEventListener('click', closeModal);
-
-// También cierra el modal cuando se hace clic fuera de la imagen (en el fondo del modal)
-document.getElementById('photo-modal').addEventListener('click', function(event) {
-    const modal = document.getElementById('photo-modal');
-    if (event.target === this) {
-        closeModal();
-    }
-});
-
-// Asegúrate de que el evento del sello no interactúe con el modal
-document.getElementById('seal').addEventListener('click', function(event) {
-    // Aquí puedes añadir el comportamiento del sello, pero no debe abrir el modal
-    event.stopPropagation(); // Esto evita que el evento de clic afecte al modal.
-    openEnvelopeAndPlayMusic();
-});
-
-// Evitar que se propague el evento en el modal
-document.getElementById('photo-modal').addEventListener('click', function(event) {
-    event.stopPropagation(); // Esto evita que el clic fuera del modal lo cierre automáticamente
-    closeModal(); // Solo cierra si haces clic en el fondo del modal
-});
-
-//termina la funcion de galeria
-//buenos deseos
-let wishes = [];
-
-function submitWish() {
-    const name = document.getElementById('wish-name').value;
-    const message = document.getElementById('wish-message').value;
-
-    if (name && message) {
-        wishes.push({ name, message });
-        document.getElementById('wish-name').value = '';
-        document.getElementById('wish-message').value = '';
-        toggleWishForm();
-        displayWishes();
-    }
-}
-
-function displayWishes() {
-    const wishesDiv = document.getElementById('wishes');
-    wishesDiv.innerHTML = wishes.map(wish => `<p><strong>${wish.name}:</strong> ${wish.message}</p>`).join('');
-}
-
-function toggleWishForm() {
-    document.getElementById('wish-form').classList.toggle('hidden');
-}
-
-function toggleWishes() {
-    document.getElementById('wishes').classList.toggle('hidden');
-}
-
-//fade-in-element
-document.addEventListener("DOMContentLoaded", function() {
-    const elementsToFade = document.querySelectorAll('.fade-in-element');
-
-    elementsToFade.forEach((element, index) => {
-        const delay = index * 0.05; // Calcula el retraso basándote en el índice (0.5 segundos por elemento)
-        element.style.transitionDelay = `${delay}s`; // Aplica el retraso dinámico a cada elemento
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    elementsToFade.forEach(element => {
-        observer.observe(element);
-    });
-});
-
-// Mostrar pantalla de bienvenida con nombre y pases
-document.getElementById('open-envelope-button').addEventListener('click', function () {
-    document.getElementById('welcome-section').style.display = 'none';
-    document.getElementById('envelope').classList.remove('hidden');
-});
-// ==============================
-// GALERÍA: autoplay + flechas + modal (aislada)
-// ==============================
+// ===== GALERÍA: autoplay + flechas + crossfade sin parpadeo =====
 (function initGallerySlider() {
+    // 1) Lista de fotos (usa tus rutas reales)
     const photos = [
       "/images/foto-horizontal-1.jpg",
       "/images/foto-horizontal-2.jpg",
@@ -292,136 +224,155 @@ document.getElementById('open-envelope-button').addEventListener('click', functi
       "/images/foto-anillo.jpg",
       "/images/foto-compromiso.jpg"
     ];
-  
-    const img    = document.getElementById("slider-image");
-    const prev   = document.getElementById("prev");
-    const next   = document.getElementById("next");
-    const modal  = document.getElementById("photo-modal");
-    const mImg   = document.getElementById("modal-image");
-    const mClose = document.getElementById("close-modal");
-  
-    // Si la nueva galería no está en el DOM, no hacemos nada
-    if (!img || !prev || !next || !modal || !mImg || !mClose) {
-      console.warn("[Galería] Elementos no encontrados. Revisa IDs: slider-image, prev, next, photo-modal, modal-image, close-modal.");
-      return;
+    if (!photos.length) return;
+
+    // 2) Elementos
+    const slideA  = document.getElementById("g-slide-a");
+    const slideB  = document.getElementById("g-slide-b");
+    const prevBtn = document.querySelector(".g-prev");
+    const nextBtn = document.querySelector(".g-next");
+    const dotsWrap = document.getElementById("g-dots");
+    const slider  = document.querySelector(".gallery-slider");
+
+    // Si no existe la sección de galería en el DOM, no hacemos nada
+    if (!slideA || !slideB || !slider || !dotsWrap) return;
+
+    // 3) Estado
+    let curr = 0;
+    let showingA = true; // qué capa está visible
+    const AUTOPLAY_MS = 3500;
+    let timer = null;
+    let userInteracted = false;
+
+    // 4) Helpers
+    const preload = (src) =>
+      new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = reject;
+        img.src = src;
+        img.decoding = "async";
+        img.fetchPriority = "low";
+      });
+
+    function setDots() {
+      dotsWrap.innerHTML = "";
+      photos.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.className = i === curr ? "active" : "";
+        b.addEventListener("click", () => {
+          userInteracted = true;
+          goTo(i);
+          restartAutoplaySoon();
+        });
+        dotsWrap.appendChild(b);
+      });
     }
-  
-    let index = 0;
-  
-    function show(i) {
-      index = (i + photos.length) % photos.length;
-      img.src = photos[index];
+
+    function updateDots() {
+      const buttons = dotsWrap.querySelectorAll("button");
+      buttons.forEach((btn, i) => btn.classList.toggle("active", i === curr));
     }
-  
-    function change(delta) { show(index + delta); }
-  
-    // Autoplay (cada 4s)
-    let timer = setInterval(() => change(1), 4000);
-    const pause = () => { clearInterval(timer); timer = null; };
-    const resume = () => { if (!timer) timer = setInterval(() => change(1), 4000); };
-  
-    // Flechas
-    prev.addEventListener("click", () => { pause(); change(-1); resume(); });
-    next.addEventListener("click", () => { pause(); change(1);  resume(); });
-  
-    // Abrir modal al click en la imagen
-    // Click para zoom dentro de la sección (overlay solo en galería)
-img.addEventListener("click", () => {
-    const section = img.closest(".gallery-section");
-    if (!section) return;
-  
-    if (section.classList.contains("zoom")) {
-      section.classList.remove("zoom");
-      resume(); // vuelve el autoplay
-    } else {
-      section.classList.add("zoom");
-      pause(); // pausa el autoplay mientras está en zoom
+
+    async function crossfadeTo(nextIndex) {
+      const nextSrc = photos[nextIndex];
+
+      // Pre-carga antes de mostrar
+      await preload(nextSrc);
+
+      const nextEl = showingA ? slideB : slideA;
+      nextEl.src = nextSrc;
+
+      // Fuerza reflow para que la transición ocurra
+      void nextEl.offsetWidth;
+
+      // Alterna visibilidad
+      nextEl.classList.add("active");
+      (showingA ? slideA : slideB).classList.remove("active");
+
+      showingA = !showingA;
+      curr = nextIndex;
+      updateDots();
     }
-  });  
-  
-    // Cerrar modal (X)
-    mClose.addEventListener("click", () => { modal.style.display = "none"; resume(); });
-  
-    // Si tu .modal cubre toda la pantalla, esto cierra al click fuera de la imagen
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) { modal.style.display = "none"; resume(); }
-    });
-  
-    // Pausar autoplay al pasar el mouse
-    img.addEventListener("mouseenter", pause);
-    img.addEventListener("mouseleave", resume);
-  })();
-// ==============================
-// GALERÍA: autoplay + flechas + modal (sin miniaturas)
-// ==============================
-(function initGallerySlider() {
-    const photos = [
-      "/images/foto-horizontal-1.jpg",
-      "/images/foto-horizontal-2.jpg",
-      "/images/foto-horizontal-3.jpg",
-      "/images/foto-h4.jpg",
-      "/images/foto-h5.jpg",
-      "/images/foto-h6.jpg",
-      "/images/foto-h7.jpg",
-      "/images/foto-h8.jpg",
-      "/images/foto-h10.jpg",
-      "/images/foto-h11.jpg",
-      "/images/foto-h12.jpg",
-      "/images/foto-h14.jpg",
-      "/images/foto-h15.jpg",
-      "/images/foto-h16.jpg",
-      "/images/foto-h17.jpg",
-      "/images/foto-18.jpg",
-      "/images/foto-anillo.jpg",
-      "/images/foto-compromiso.jpg"
-    ];
-  
-    const img    = document.getElementById("slider-image");
-    const prev   = document.getElementById("prev");
-    const next   = document.getElementById("next");
-    const modal  = document.getElementById("photo-modal");
-    const mImg   = document.getElementById("modal-image");
-    const mClose = document.getElementById("close-modal");
-  
-    if (!img || !prev || !next || !modal || !mImg || !mClose) {
-      console.warn("[Galería] Faltan elementos. Revisa IDs: slider-image, prev, next, photo-modal, modal-image, close-modal.");
-      return;
+
+    function next() {
+      const ni = (curr + 1) % photos.length;
+      crossfadeTo(ni);
     }
-  
-    let index = 0;
-  
-    function show(i) {
-      index = (i + photos.length) % photos.length;
-      // efecto de fade opcional
-      img.style.opacity = 0;
+
+    function prev() {
+      const pi = (curr - 1 + photos.length) % photos.length;
+      crossfadeTo(pi);
+    }
+
+    function goTo(index) {
+      if (index === curr) return;
+      crossfadeTo(index);
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      timer = setInterval(next, AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    function restartAutoplaySoon() {
+      stopAutoplay();
       setTimeout(() => {
-        img.src = photos[index];
-        img.onload = () => { img.style.opacity = 1; };
-      }, 150);
+        // Si quieres que NO se reanude tras interacción, comenta la línea de abajo
+        startAutoplay();
+      }, 4000);
     }
-  
-    function change(delta) { show(index + delta); }
-  
-    // Autoplay (cada 4s)
-    let timer = setInterval(() => change(1), 4000);
-    const pause = () => { clearInterval(timer); timer = null; };
-    const resume = () => { if (!timer) timer = setInterval(() => change(1), 4000); };
-  
-    // Flechas
-    prev.addEventListener("click", () => { pause(); change(-1); resume(); });
-    next.addEventListener("click", () => { pause(); change(1);  resume(); });
-  
-    // Abrir modal al click en la imagen
-    img.addEventListener("click", () => {
-      modal.style.display = "block";
-      mImg.src = photos[index];
-      pause();
-    });
-  
-    // Cerrar modal (X o clic fuera)
-    mClose.addEventListener("click", () => { modal.style.display = "none"; resume(); });
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) { modal.style.display = "none"; resume(); }
-    });
-  })();
-    
+
+    // 5) Inicializa primer frame (pre-carga 1° y 2° para evitar flash)
+    (async function init() {
+      await preload(photos[0]);
+      slideA.src = photos[0];
+      slideA.classList.add("active");
+      showingA = true;
+
+      // Pre-carga la siguiente para que el primer cambio sea suave
+      const nextIdx = (curr + 1) % photos.length;
+      preload(photos[nextIdx]).catch(() => {});
+
+      setDots();
+      startAutoplay();
+    })();
+
+    // 6) Eventos de flechas
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        userInteracted = true;
+        next();
+        restartAutoplaySoon();
+      });
+    }
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        userInteracted = true;
+        prev();
+        restartAutoplaySoon();
+      });
+    }
+
+    // 7) Pausa al entrar con el mouse (desktop) y reanuda al salir
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", restartAutoplaySoon);
+
+    // 8) Swipe para móvil
+    let startX = 0;
+    slider.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const dx = endX - startX;
+      if (Math.abs(dx) > 40) {
+        userInteracted = true;
+        dx < 0 ? next() : prev();
+        restartAutoplaySoon();
+      }
+    }, { passive: true });
+})();

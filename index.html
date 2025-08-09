@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/8435ad2454.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <link rel="preload" href="/images/foto-horizontal-1.jpg" as="image" imagesrcset="/images/foto-horizontal-1.jpg">
+    <link rel="preload" href="/images/foto-horizontal-2.jpg" as="image" imagesrcset="/images/foto-horizontal-2.jpg">
 </head>
 <body>
 <div class="main-content">
@@ -184,7 +186,7 @@
                  colors="primary:#556B2F,secondary:#808000" 
                  class="lord-icon-style"
                  ></lord-icon>
-                <p>"El mejor regalo es su compañía, sin embargo, si desean contribuir a nuestra nueva vida juntos,cualquier obsequio o sobre será muy apreciado". </p>
+                <p>"El mejor regalo es su compañía, sin embargo, si desean contribuir a nuestra nueva vida juntos, cualquier obsequio o sobre. será muy apreciado". </p>
                 <p>¡Gracias por ser parte de este capítulo tan especial!</p>
             </div>
             <!--Foto de separacion-->
@@ -198,37 +200,28 @@
                 </div>
                 <p>Nos encantaría que nos acompañaras con atuendo formal/elegante para hacer que la ocasión sea aún más especial.</p>
             </div>   
-            <div class="gallery-section fade-in-element fade-in-element">
-                <h2>Galería de fotos</h2>
-            
-                <!-- Checkbox oculto que controla la visibilidad del modal -->
-                <input type="checkbox" id="toggle-modal" class="hidden-checkbox">
-            
-                <!-- Modal de fotos -->
-                <div id="photo-modal" class="modal">
-                    <!-- Label para cerrar el modal -->
-                    <label for="toggle-modal" class="close">&times;</label>
-                    <img class="modal-content" id="main-photo-modal" alt="modal">
-                </div> 
-            
-                <!-- Galería principal -->
-                <div class="gallery-section fade-in-element">
-
-                  
-                    <!-- Modal (reutiliza tus estilos .modal, .modal-content, .close) -->
-                    <div id="photo-modal" class="modal" style="display:none;">
-                      <span class="close" id="close-modal">&times;</span>
-                      <img class="modal-content" id="modal-image" alt="Foto en grande">
-                    </div>
-                  
-                    <!-- Slider sin miniaturas -->
-                    <div class="slider">
-                      <button class="arrow left" id="prev">&#10094;</button>
-                      <img id="slider-image" src="/images/foto-horizontal-1.jpg" alt="Foto principal">
-                      <button class="arrow right" id="next">&#10095;</button>
-                    </div>
-                  </div>
-                  
+                  <!-- GALERÍA (autoplay + flechas + crossfade sin parpadeo) -->
+            <section id="gallery-section" class="gallery-section fade-in-element">
+    <h2>Galería</h2>
+  
+    <div class="gallery-slider" aria-label="Galería de fotos">
+      <!-- Pista de imágenes (dos capas para crossfade) -->
+      <img id="g-slide-a" class="g-slide active" alt="Foto galería 1" decoding="async">
+      <img id="g-slide-b" class="g-slide" alt="Foto galería 2" decoding="async">
+  
+      <!-- Flechas -->
+      <button class="g-nav g-prev" aria-label="Foto anterior" type="button">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <button class="g-nav g-next" aria-label="Foto siguiente" type="button">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+  
+      <!-- Indicadores (opcionales) -->
+      <div class="g-dots" id="g-dots" aria-hidden="true"></div>
+    </div>
+            </section>
+  
             <div class="adults-only-section fade-in-element fade-in-element">
                 <lord-icon 
                 src="https://cdn.lordicon.com/yvgmrqny.json" 
