@@ -10,7 +10,7 @@ const guests = [
     { id: 9, name: "Ebelia Tunchez y familia", passes: 3 },
     { id: 10, name: "Eduardo Ortega y familia", passes: 3 },
     { id: 11, name: "Eduardo y Nathali", passes: 2 },
-    { id: 12, name: "Edwin García y familia", passes: 2 },
+    { id: 12, name: "Edwin García y Esposa", passes: 2 },
     { id: 13, name: "Edwin Rodriguez", passes: 4 },
     { id: 14, name: "Eloísa Avendaño", passes: 1 },
     { id: 15, name: "Erwin Orantes", passes: 1 },
@@ -46,8 +46,9 @@ const guests = [
     { id: 45, name: "Víctor Taquez", passes: 1 },
     { id: 46, name: "Wesley Buch", passes: 1 },
     { id: 47, name: "Yani Hernández y familia", passes: 3 },
-    { id: 48, name: "Yesenia García", passes: 1 }
-  ];
+    { id: 48, name: "Yesenia García", passes: 1 },
+    { id: 49, name: "Gabriel Morgan y Novia", passes: 2 }
+];
   
 
 document.addEventListener("DOMContentLoaded", function () {
