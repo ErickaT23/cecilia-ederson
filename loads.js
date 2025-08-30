@@ -47,7 +47,11 @@ const guests = [
     { id: 46, name: "Wesley Buch", passes: 1 },
     { id: 47, name: "Yani Hernández y familia", passes: 3 },
     { id: 48, name: "Yesenia García", passes: 1 },
-    { id: 49, name: "Gabriel Morgan y Novia", passes: 2 }
+    { id: 49, name: "Gabriel Morgan y Novia", passes: 2 },
+    { id: 50, name: "Víctor León y Fam.", passes: 3 },
+    { id: 51, name: "Odilia Tunchez", passes: 1 },
+    { id: 52, name: "Víctor y Aura", passes: 2 },
+    { id: 53, name: "Sandra Tunchez", passes: 1 }
 ];
   
 
