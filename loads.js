@@ -52,7 +52,8 @@ const guests = [
     { id: 51, name: "Odilia Tunchez", passes: 1 },
     { id: 52, name: "Víctor y Aura", passes: 2 },
     { id: 53, name: "Sandra Tunchez", passes: 1 },
-    { id: 54, name: "Fabiola Marroquín", passes: 1 }
+    { id: 54, name: "Fabiola Marroquín", passes: 1 },
+    { id: 55, name: "Alicia Rivera e hijas", passes: 3 }
 ];
   
 
